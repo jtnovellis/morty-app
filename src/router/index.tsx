@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Wrapper } from '../components';
 import { AuthLayout, RootLayout } from '../layouts';
-import { HomePage, Login, Signup } from '../pages';
+import { CharDetailPage, HomePage, Login, Signup } from '../pages';
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <HomePage />,
+          },
+          {
+            path: 'characters/:id',
+            element: <CharDetailPage />,
           },
         ],
       },

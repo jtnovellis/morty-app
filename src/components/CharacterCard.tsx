@@ -3,20 +3,8 @@ import { Link } from 'react-router-dom';
 import { HeartIcon, LinkIcon } from '@heroicons/react/24/outline';
 
 interface CharacterCardProps extends Character {}
-export function CharacterCard({
-  id,
-  name,
-  status,
-  species,
-  type,
-  gender,
-  origin,
-  location,
-  image,
-  episode,
-  url,
-  created,
-}: CharacterCardProps) {
+
+export function CharacterCard({ id, name, status, species, location, image }: CharacterCardProps) {
   const color =
     status === 'Alive' ? 'text-green-500' : status === 'Dead' ? 'text-red-500' : 'text-gray-500';
 

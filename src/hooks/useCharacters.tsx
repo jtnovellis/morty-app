@@ -5,7 +5,7 @@ import { getCharacters } from '../services/characters';
 export function useCharacters() {
   const [data, setData] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<String | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {

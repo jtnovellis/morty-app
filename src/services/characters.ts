@@ -1,5 +1,11 @@
+import { api } from './api';
+
 export async function getCharacters() {
-  const res = await fetch(`${import.meta.env.VITE_BASE_API_URL}/character`);
-  const data = await res.json();
-  return data;
+  const res = await api.get('/character');
+  return res.data;
+}
+
+export async function getCharacterById(id: string) {
+  const res = await api.get(`/character/${id}`);
+  return res.data;
 }
