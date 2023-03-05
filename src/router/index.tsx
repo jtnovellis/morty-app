@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Wrapper } from '../components';
 import { AuthLayout, RootLayout } from '../layouts';
-import { CharDetailPage, HomePage, Login, Signup } from '../pages';
+import { CharDetailPage, ErrorPage, HomePage, Login, Signup } from '../pages';
 
 export const router = createBrowserRouter([
   {
     element: <Wrapper />,
+    errorElement: <ErrorPage />,
     children: [
       {
         element: <RootLayout />,

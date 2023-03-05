@@ -28,3 +28,27 @@ export enum Status {
   Dead = 'Dead',
   Unknown = 'unknown',
 }
+
+export interface RawUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LogUser {
+  email: string;
+  password: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  favoritesId: string[];
+}
+
+export interface Favorite {
+  id: string;
+  character: Character;
+}

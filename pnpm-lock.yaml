@@ -7,6 +7,7 @@ specifiers:
   '@testing-library/user-event': 14.4.3
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
+  '@types/uuid': ^9.0.1
   '@typescript-eslint/eslint-plugin': 5.0.0
   '@vitejs/plugin-react-swc': 3.0.0
   autoprefixer: 10.4.13
@@ -27,6 +28,7 @@ specifiers:
   react-router-dom: 6.8.2
   tailwindcss: 3.2.7
   typescript: 4.9.5
+  uuid: ^9.0.0
   vite: 4.1.0
   vitest: 0.29.2
 
@@ -36,6 +38,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
+  uuid: 9.0.0
 
 devDependencies:
   '@testing-library/jest-dom': 5.16.5
@@ -43,6 +46,7 @@ devDependencies:
   '@testing-library/user-event': 14.4.3
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
+  '@types/uuid': 9.0.1
   '@typescript-eslint/eslint-plugin': 5.0.0_b5bhraix63ihvgz63wcyvipcly
   '@vitejs/plugin-react-swc': 3.0.0_vite@4.1.0
   autoprefixer: 10.4.13_postcss@8.4.21
@@ -631,6 +635,10 @@ packages:
     resolution: {integrity: sha512-SBwbxYoyPIvxHbeHxTZX2Pe/74F/tX2/D3mMvzabdeJ25bBojfW0TyB8BHrbq/9zaaKICJZjLP+8r6AeZMFCuQ==}
     dependencies:
       '@types/jest': 29.4.0
+    dev: true
+
+  /@types/uuid/9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -3519,6 +3527,11 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}

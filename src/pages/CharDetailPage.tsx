@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { Character } from '../../types';
 import { getCharacterById } from '../services/characters';
+import { Loading } from '../components';
+import { ErrorPage } from './ErrorPage';
 
 export function CharDetailPage() {
   const { id } = useParams();
@@ -32,11 +34,11 @@ export function CharDetailPage() {
       : 'text-gray-500';
 
   if (loading) {
-    return <div className='text-center font-bold text-xl mt-28'>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
-    return <div className='text-center font-bold text-xl mt-28'>Something went wrong: {error}</div>;
+    return <ErrorPage error={error} />;
   }
 
   return (
