@@ -13,7 +13,7 @@ export function Header() {
 
   return (
     <>
-      <header className='bg-gray-700'>
+      <header className='bg-gray-700 fixed top-0 w-full z-10'>
         <nav className='hidden sm:flex justify-between items-center px-4 py-3 mx-auto max-w-6xl'>
           <Link to='/'>
             <img src={Logo} alt='Logo' className='w-16' />
