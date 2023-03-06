@@ -7,3 +7,4 @@ export { EpisodesPage } from './EpisodesPage';
 export { EpisodeDetailPage } from './EpisodeDetailPage';
 export { LocationPage } from './LocationPage';
 export { LocationDetailPage } from './LocationDetail';
+export { FavoritesPage } from './FavoritesPage';

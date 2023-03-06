@@ -10,6 +10,8 @@ export interface UserContextType {
   logUser: (user: LogUser) => void;
   logout: () => void;
   addFavoriteToUser: (fav: Pick<Character, 'id' | 'name' | 'image'>) => void;
+  currentFavorites: Favorite[];
+  deleteFavorite: (id: string) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -19,6 +21,8 @@ export const UserContext = createContext<UserContextType>({
   logUser: () => {},
   logout: () => {},
   addFavoriteToUser: () => {},
+  currentFavorites: [],
+  deleteFavorite: () => {},
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -27,17 +31,24 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [favorites, setFavorites] = useLocalStorage<Favorite[]>('favorites', []);
   const [isLogged, setIsLogged] = useLocalStorage<boolean>('isLogged', false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentFavorites, setCurrentFavorites] = useState<Favorite[]>([]);
 
   useEffect(() => {
     const isUser = users.find((u) => u.id === user?.id) as User;
     if (isUser) {
+      isUser.favoritesId.forEach((id) => {
+        const fav = favorites.find((f) => f.id === id) as Favorite;
+        setCurrentFavorites((prev) => [...prev, fav]);
+      });
+      setCurrentFavorites((prev) => [...new Set(prev)]);
+
       setCurrentUser(isUser);
       setIsLogged(true);
     } else {
       setCurrentUser(null);
       setIsLogged(false);
     }
-  }, [user]);
+  }, [user, users, favorites]);
 
   function addNewUser(usr: RawUser) {
     const exists = users.find((u) => u.email === usr.email);
@@ -96,9 +107,38 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  function deleteFavorite(id: string) {
+    const userToUpdate = users.find((u) => u.id === user?.id);
+
+    if (userToUpdate) {
+      const newFavorites = favorites.filter((f) => f.id !== id);
+      setFavorites(newFavorites);
+      const newUser = {
+        ...userToUpdate,
+        favoritesId: userToUpdate.favoritesId.filter((f) => f !== id),
+      };
+      setUser(newUser);
+      setUsers((prev) => {
+        const newUsers = prev.filter((u) => u.id !== newUser.id);
+        return [...newUsers, newUser];
+      });
+    } else {
+      alert('You must be logged in to add favorites');
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ addFavoriteToUser, currentUser, isLogged, addNewUser, logUser, logout }}
+      value={{
+        currentFavorites,
+        deleteFavorite,
+        addFavoriteToUser,
+        currentUser,
+        isLogged,
+        addNewUser,
+        logUser,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -8,6 +8,7 @@ import {
   Signup,
   EpisodesPage,
   EpisodeDetailPage,
+  FavoritesPage,
   LocationPage,
   LocationDetailPage,
 } from '../pages';
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
           {
             path: 'locations/:id',
             element: <LocationDetailPage />,
+          },
+          {
+            path: 'user/favorites',
+            element: <FavoritesPage />,
           },
         ],
       },
