@@ -69,5 +69,9 @@ export interface User {
 
 export interface Favorite {
   id: string;
-  character: Character;
+  character: Pick<Character, 'id' | 'name' | 'image'>;
+}
+
+export interface RawFavorite {
+  character: Pick<Character, 'id' | 'name' | 'image'>;
 }

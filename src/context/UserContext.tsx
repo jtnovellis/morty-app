@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { Favorite, LogUser, RawUser, User } from '../../types';
+import { Favorite, LogUser, RawUser, User, RawFavorite, Character } from '../../types';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,6 +9,7 @@ export interface UserContextType {
   addNewUser: (user: RawUser) => void;
   logUser: (user: LogUser) => void;
   logout: () => void;
+  addFavoriteToUser: (fav: Pick<Character, 'id' | 'name' | 'image'>) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -17,6 +18,7 @@ export const UserContext = createContext<UserContextType>({
   addNewUser: () => {},
   logUser: () => {},
   logout: () => {},
+  addFavoriteToUser: () => {},
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -71,8 +73,33 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  function addFavoriteToUser(fav: Pick<Character, 'id' | 'name' | 'image'>) {
+    const newFav: Favorite = {
+      id: uuidv4(),
+      character: fav,
+    };
+    const userToUpdate = users.find((u) => u.id === user?.id);
+
+    if (userToUpdate) {
+      setFavorites((prev) => [...prev, newFav]);
+      const newUser = {
+        ...userToUpdate,
+        favoritesId: [...userToUpdate.favoritesId, newFav.id],
+      };
+      setUser(newUser);
+      setUsers((prev) => {
+        const newUsers = prev.filter((u) => u.id !== newUser.id);
+        return [...newUsers, newUser];
+      });
+    } else {
+      alert('You must be logged in to add favorites');
+    }
+  }
+
   return (
-    <UserContext.Provider value={{ currentUser, isLogged, addNewUser, logUser, logout }}>
+    <UserContext.Provider
+      value={{ addFavoriteToUser, currentUser, isLogged, addNewUser, logUser, logout }}
+    >
       {children}
     </UserContext.Provider>
   );

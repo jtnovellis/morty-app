@@ -1,12 +1,18 @@
 import { Character } from '../../types';
 import { Link } from 'react-router-dom';
 import { HeartIcon, LinkIcon } from '@heroicons/react/24/outline';
+import { useUser } from '../hooks/useUser';
 
 interface CharacterCardProps extends Character {}
 
 export function CharacterCard({ id, name, status, species, location, image }: CharacterCardProps) {
+  const { addFavoriteToUser } = useUser();
   const color =
     status === 'Alive' ? 'text-green-500' : status === 'Dead' ? 'text-red-500' : 'text-gray-500';
+
+  function handleFavorite() {
+    addFavoriteToUser({ id, name, image });
+  }
 
   return (
     <article className='flex max-h-48 bg-gray-600 rounded-lg'>
@@ -27,7 +33,10 @@ export function CharacterCard({ id, name, status, species, location, image }: Ch
         </p>
       </div>
       <div className='flex flex-col justify-end mt-3 text-blue-500 gap-5 p-3'>
-        <button className='transform transition duration-500 hover:scale-125'>
+        <button
+          className='transform transition duration-500 hover:scale-125'
+          onClick={handleFavorite}
+        >
           <HeartIcon className='w-6' />
         </button>
         <Link

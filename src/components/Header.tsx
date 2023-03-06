@@ -7,7 +7,7 @@ import { useUser } from '../hooks/useUser';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLogged, logout } = useUser();
+  const { isLogged, logout, currentUser } = useUser();
 
   function handleClick() {
     setIsOpen((prev) => !prev);
@@ -49,7 +49,7 @@ export function Header() {
             )}
             <div className='relative'>
               <span className='absolute bg-blue-500 top-0 right-0 rounded-full w-5 h-5 flex items-center justify-center'>
-                0
+                {currentUser?.favoritesId.length}
               </span>
               <Link to='/user/favorites'>
                 <HeartIcon className='w-12' />
@@ -106,7 +106,7 @@ export function Header() {
             )}
             <div className='relative'>
               <span className='absolute bg-blue-500 top-0 right-0 rounded-full w-5 h-5 flex items-center justify-center'>
-                0
+                {currentUser?.favoritesId.length}
               </span>
               <Link to='/user/favorites'>
                 <HeartIcon className='w-12' />
