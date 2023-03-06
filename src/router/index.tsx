@@ -8,6 +8,8 @@ import {
   Signup,
   EpisodesPage,
   EpisodeDetailPage,
+  LocationPage,
+  LocationDetailPage,
 } from '../pages';
 import { Wrapper } from '../components';
 
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
           {
             path: 'episodes/:id',
             element: <EpisodeDetailPage />,
+          },
+          {
+            path: 'locations',
+            element: <LocationPage />,
+          },
+          {
+            path: 'locations/:id',
+            element: <LocationDetailPage />,
           },
         ],
       },

@@ -6,3 +6,4 @@ export { Input } from './Input';
 export { CharacterCard } from './CharacterCard';
 export { Loading } from './Loading';
 export { Pagination } from './Pagination';
+export { LocationCard } from './LocationCard';

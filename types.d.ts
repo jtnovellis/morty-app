@@ -28,6 +28,15 @@ export interface Location {
   url: string;
 }
 
+export interface LocationType {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: Character[];
+  url: string;
+}
+
 export enum Species {
   Alien = 'Alien',
   Human = 'Human',

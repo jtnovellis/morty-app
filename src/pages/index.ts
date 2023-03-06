@@ -5,3 +5,5 @@ export { CharDetailPage } from './CharDetailPage';
 export { ErrorPage } from './ErrorPage';
 export { EpisodesPage } from './EpisodesPage';
 export { EpisodeDetailPage } from './EpisodeDetailPage';
+export { LocationPage } from './LocationPage';
+export { LocationDetailPage } from './LocationDetail';

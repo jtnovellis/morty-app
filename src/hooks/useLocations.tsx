@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { getEpisodes } from '../services/episodes';
-import { Episode } from '../../types';
+import { getLocations } from '../services/locations';
+import { LocationType } from '../../types';
 
-export function useEpisodes({ page = 1 }) {
-  const [data, setData] = useState<Episode[]>([]);
+export function useLocations({ page = 1 }) {
+  const [data, setData] = useState<LocationType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -13,10 +13,10 @@ export function useEpisodes({ page = 1 }) {
     (async () => {
       setLoading(true);
       try {
-        const epidoses = await getEpisodes(page);
-        setData(epidoses.results);
-        setHasNextPage(epidoses.info.next !== null);
-        setHasPreviousPage(epidoses.info.prev !== null);
+        const locations = await getLocations(page);
+        setData(locations.results);
+        setHasNextPage(locations.info.next !== null);
+        setHasPreviousPage(locations.info.prev !== null);
       } catch (_) {
         setError(true);
       } finally {
