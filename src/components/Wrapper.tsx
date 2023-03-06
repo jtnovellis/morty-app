@@ -1,5 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import { UserProvider } from '../context/UserContext';
 
 export function Wrapper() {
-  return <Outlet />;
+  return (
+    <UserProvider>
+      <Outlet />
+    </UserProvider>
+  );
 }

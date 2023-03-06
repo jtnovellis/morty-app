@@ -5,12 +5,14 @@ import { Character } from '../../types';
 import { getCharacterById } from '../services/characters';
 import { Loading } from '../components';
 import { ErrorPage } from './ErrorPage';
+import { useUser } from '../hooks/useUser';
 
 export function CharDetailPage() {
   const { id } = useParams();
   const [character, setCharacter] = useState<Character | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { addFavoriteToUser } = useUser();
 
   useEffect(() => {
     (async () => {
@@ -33,6 +35,10 @@ export function CharDetailPage() {
       ? 'text-red-500'
       : 'text-gray-500';
 
+  function handleFavorite() {
+    addFavoriteToUser({ id: character?.id!, name: character?.name!, image: character?.image! });
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -54,7 +60,10 @@ export function CharDetailPage() {
             </div>
           </div>
         </div>
-        <button className='transform transition duration-500 hover:scale-125'>
+        <button
+          className='transform transition duration-500 hover:scale-125'
+          onClick={handleFavorite}
+        >
           <HeartIcon className='w-10' />
         </button>
       </div>

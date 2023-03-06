@@ -13,8 +13,27 @@ export interface Character {
   created: Date;
 }
 
+export interface Episode {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters: Character[];
+  url: string;
+  created: Date;
+}
+
 export interface Location {
   name: string;
+  url: string;
+}
+
+export interface LocationType {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: Character[];
   url: string;
 }
 
@@ -50,5 +69,9 @@ export interface User {
 
 export interface Favorite {
   id: string;
-  character: Character;
+  character: Pick<Character, 'id' | 'name' | 'image'>;
+}
+
+export interface RawFavorite {
+  character: Pick<Character, 'id' | 'name' | 'image'>;
 }

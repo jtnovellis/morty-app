@@ -1,9 +1,13 @@
 import { useRef } from 'react';
 import { Input, Button } from '../components';
+import { useUser } from '../hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const { logUser } = useUser();
+  const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -12,7 +16,8 @@ export function Login() {
 
     if (!email || !password) return;
 
-    alert(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    logUser({ email, password });
+    navigate('/');
   }
 
   return (

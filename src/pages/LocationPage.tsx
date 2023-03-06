@@ -1,12 +1,11 @@
-import { CharacterCard, Pagination } from '../components';
-import { Loading } from '../components';
-import { ErrorPage } from './ErrorPage';
 import { useState } from 'react';
-import { useCharacters } from '../hooks/useCharacters';
+import { Pagination, Loading, LocationCard } from '../components';
+import { useLocations } from '../hooks/useLocations';
+import { ErrorPage } from './ErrorPage';
 
-export function HomePage() {
+export function LocationPage() {
   const [page, setPage] = useState(1);
-  const { data, loading, error, hasNextPage, hasPreviousPage } = useCharacters({ page });
+  const { data, loading, error, hasNextPage, hasPreviousPage } = useLocations({ page });
 
   if (loading) {
     return <Loading />;
@@ -25,9 +24,9 @@ export function HomePage() {
 
   return (
     <div className='flex flex-col'>
-      <section className='grid grid-cols-1 py-10 gap-8 sm:grid-cols-2'>
-        {data?.map((character) => (
-          <CharacterCard key={character.id} {...character} />
+      <section className='grid grid-cols-1 md:grid-cols-2 gap-6 py-10'>
+        {data?.map((location) => (
+          <LocationCard key={location.id} {...location} />
         ))}
       </section>
       <Pagination
