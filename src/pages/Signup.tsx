@@ -1,11 +1,15 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input, Button } from '../components';
+import { useUser } from '../hooks/useUser';
 
 interface SignupProps {}
 export function Signup({}: SignupProps) {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const { addNewUser } = useUser();
+  const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -14,8 +18,8 @@ export function Signup({}: SignupProps) {
     const password = passwordRef.current?.value;
 
     if (!name || !email || !password) return;
-
-    alert(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    addNewUser({ name, email, password });
+    navigate('/');
   }
 
   return (

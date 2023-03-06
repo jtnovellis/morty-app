@@ -8,6 +8,7 @@ export interface UserContextType {
   isLogged: boolean;
   addNewUser: (user: RawUser) => void;
   logUser: (user: LogUser) => void;
+  logout: () => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -15,6 +16,7 @@ export const UserContext = createContext<UserContextType>({
   isLogged: false,
   addNewUser: () => {},
   logUser: () => {},
+  logout: () => {},
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -53,6 +55,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  function logout() {
+    setUser(null);
+    setIsLogged(false);
+  }
+
   function logUser(usr: LogUser) {
     const exists = users.find((u) => u.email === usr.email && u.password === usr.password);
 
@@ -65,7 +72,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <UserContext.Provider value={{ currentUser, isLogged, addNewUser, logUser }}>
+    <UserContext.Provider value={{ currentUser, isLogged, addNewUser, logUser, logout }}>
       {children}
     </UserContext.Provider>
   );
