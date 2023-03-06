@@ -1,7 +1,7 @@
 import { api } from './api';
 
-export async function getCharacters() {
-  const res = await api.get('/character');
+export async function getCharacters(page: number) {
+  const res = await api.get(`/character?page=${page}`);
   return res.data;
 }
 
