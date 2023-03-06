@@ -1,6 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AuthLayout, RootLayout } from '../layouts';
-import { CharDetailPage, ErrorPage, HomePage, Login, Signup, EpisodesPage } from '../pages';
+import {
+  CharDetailPage,
+  ErrorPage,
+  HomePage,
+  Login,
+  Signup,
+  EpisodesPage,
+  EpisodeDetailPage,
+} from '../pages';
 import { Wrapper } from '../components';
 
 export const router = createBrowserRouter([
@@ -23,6 +31,10 @@ export const router = createBrowserRouter([
           {
             path: 'episodes',
             element: <EpisodesPage />,
+          },
+          {
+            path: 'episodes/:id',
+            element: <EpisodeDetailPage />,
           },
         ],
       },
