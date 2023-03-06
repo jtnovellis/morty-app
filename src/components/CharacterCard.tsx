@@ -1,17 +1,23 @@
 import { Character } from '../../types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HeartIcon, LinkIcon } from '@heroicons/react/24/outline';
 import { useUser } from '../hooks/useUser';
 
 interface CharacterCardProps extends Character {}
 
 export function CharacterCard({ id, name, status, species, location, image }: CharacterCardProps) {
-  const { addFavoriteToUser } = useUser();
+  const { addFavoriteToUser, isLogged } = useUser();
+  const navigate = useNavigate();
   const color =
     status === 'Alive' ? 'text-green-500' : status === 'Dead' ? 'text-red-500' : 'text-gray-500';
 
   function handleFavorite() {
-    addFavoriteToUser({ id, name, image });
+    if (!isLogged) {
+      navigate('/login');
+      return;
+    } else {
+      addFavoriteToUser({ id, name, image });
+    }
   }
 
   return (

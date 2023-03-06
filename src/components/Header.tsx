@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/icon-144x144.png';
 import { useUser } from '../hooks/useUser';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { isLogged, logout, currentUser } = useUser();
+  const navigate = useNavigate();
 
   function handleClick() {
     setIsOpen((prev) => !prev);
@@ -51,9 +52,17 @@ export function Header() {
               <span className='absolute bg-blue-500 top-0 right-0 rounded-full w-5 h-5 flex items-center justify-center'>
                 {currentUser?.favoritesId.length}
               </span>
-              <Link to='/user/favorites'>
+              <button
+                onClick={() => {
+                  if (isLogged) {
+                    navigate('/user/favorites');
+                  } else {
+                    navigate('/login');
+                  }
+                }}
+              >
                 <HeartIcon className='w-12' />
-              </Link>
+              </button>
             </div>
           </div>
         </nav>

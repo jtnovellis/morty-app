@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { Character } from '../../types';
 import { getCharacterById } from '../services/characters';
@@ -12,7 +12,8 @@ export function CharDetailPage() {
   const [character, setCharacter] = useState<Character | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { addFavoriteToUser } = useUser();
+  const { addFavoriteToUser, isLogged } = useUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -36,7 +37,12 @@ export function CharDetailPage() {
       : 'text-gray-500';
 
   function handleFavorite() {
-    addFavoriteToUser({ id: character?.id!, name: character?.name!, image: character?.image! });
+    if (!isLogged) {
+      navigate('/login');
+      return;
+    } else {
+      addFavoriteToUser({ id: character?.id!, name: character?.name!, image: character?.image! });
+    }
   }
 
   if (loading) {
